@@ -38,4 +38,8 @@ export class LoginService {
 
     return response;
   }
+
+  isLoggedIn(): boolean {
+    return (this.accessToken !== "");
+  }
 }
