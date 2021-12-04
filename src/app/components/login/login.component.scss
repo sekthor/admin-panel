@@ -33,4 +33,13 @@ input {
     margin: auto;
     margin: 0.5em;
     box-sizing: content-box;
+    font-size: 1em;
+}
+#login-btn:hover {
+    background-color: #900000;
+}
+#login-btn:active {
+    color:maroon;
+    background-color: white;
+    border: 1px solid maroon;
 }

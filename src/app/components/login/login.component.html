@@ -1,6 +1,7 @@
 <div id="form">
 <img src="assets/logo.png" alt="logo" id="logo">
-<input type="text" id="username" placeholder="username">
-<input type="password" id="password" placeholder="password">
-<button id="login-btn">log in</button>
+<input type="text" id="username" placeholder="username" [(ngModel)]="username">
+<input type="password" id="password" placeholder="password" [(ngModel)]="password">
+<button id="login-btn"(click)="login()">log in</button>
+<a href="">register</a>
 </div>
