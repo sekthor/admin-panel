@@ -14,6 +14,8 @@ export class LoginComponent implements OnInit {
   accessToken = "";
   refreshToken = "";
 
+  errorMsg: string = "";
+
   constructor(
     private loginService: LoginService
   ) { }
@@ -22,12 +24,30 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-   this.loginService.getTokens(this.username, this.password).subscribe(
-     response => {
-       this.accessToken = response.access_token;
-       this.refreshToken = response.refresh_token;
-     }
-   )
+    if (!this.isFormValid()) return;
+
+    this.loginService.login(this.username, this.password).subscribe(
+      response => {
+        this.accessToken = response.access_token;
+        this.refreshToken = response.refresh_token;
+      },
+      error => {
+        this.errorMsg = "Invalid credentials";
+      } 
+    )
+  }
+
+  isFormValid(): boolean {
+    if (!this.username) {
+      this.errorMsg = "Empty username";
+      return false;
+    }
+
+    if (!this.password) {
+      this.errorMsg = "Empty password";
+      return false;
+    }
+    return true; 
   }
 
 }

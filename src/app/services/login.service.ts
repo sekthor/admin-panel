@@ -9,27 +9,33 @@ import { TokenResponse } from '../interfaces/TokenResponse';
 export class LoginService {
 
   private loginURL = "/api/v1alpha/login"
-  private accessToken = null;
-  private refreshToken = null;
+  private accessToken: string = "";
+  private refreshToken: string = "";
 
   constructor(
     private http: HttpClient) { }
 
-  login(){
 
-  }
-
-  getTokens(username: string, password: string): Observable<TokenResponse> {
+  login(username: string, password: string): Observable<TokenResponse> {
     const body = new HttpParams()
     .set('username', username)
     .set('password', password);
 
-  return this.http.post<TokenResponse>(this.loginURL,
-    body,
-    {
-      headers: new HttpHeaders()
-        .set('Content-Type', 'application/x-www-form-urlencoded')
-    }
-  );
+    const response = this.http.post<TokenResponse>(this.loginURL,
+      body,
+      {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/x-www-form-urlencoded')
+      }
+    );
+
+    response.subscribe(tokens => {
+      this.accessToken = tokens.access_token;
+      this.refreshToken = tokens.refresh_token;
+    }, error => {
+
+    })
+
+    return response;
   }
 }

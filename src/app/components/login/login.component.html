@@ -3,5 +3,5 @@
 <input type="text" id="username" placeholder="username" [(ngModel)]="username">
 <input type="password" id="password" placeholder="password" [(ngModel)]="password">
 <button id="login-btn"(click)="login()">log in</button>
-<a href="">register</a>
+<p *ngIf="errorMsg" id="error">{{ errorMsg }}</p>
 </div>
