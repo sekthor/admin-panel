@@ -1,0 +1,36 @@
+#form {
+    border: 1px solid #ddd;
+    max-width: 250px;
+    margin: auto;
+    margin-top: 4em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5em 3em;
+}
+input {
+    border: 1px solid #ddd;
+    padding: 1em;
+    display: block;
+    width: 100%;
+    margin: 0.5em;
+    box-sizing: border-box;
+}
+#logo {
+    display: block;
+    margin: 1em auto;
+    border: 3px solid #ddd;
+    border-radius: 50%;
+    max-width: 100px;
+}
+#login-btn {
+    background-color: maroon;
+    color: white;
+    border: none;
+    padding: 1em 0em;
+    width: 100%;
+    display: block;
+    margin: auto;
+    margin: 0.5em;
+    box-sizing: content-box;
+}
