@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { delay } from 'rxjs';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -17,7 +19,8 @@ export class LoginComponent implements OnInit {
   errorMsg: string = "";
 
   constructor(
-    private loginService: LoginService
+    private loginService: LoginService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -30,6 +33,8 @@ export class LoginComponent implements OnInit {
       response => {
         this.accessToken = response.access_token;
         this.refreshToken = response.refresh_token;
+        console.log(this.loginService.isLoggedIn())
+        this.router.navigate(["/dashboard"]);
       },
       error => {
         this.errorMsg = "Invalid credentials";

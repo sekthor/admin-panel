@@ -8,7 +8,7 @@ import { TokenResponse } from '../interfaces/TokenResponse';
 })
 export class LoginService {
 
-  private loginURL = "/api/v1alpha/login"
+  private backendURL = "/api/v1alpha/"
   private accessToken: string = "";
   private refreshToken: string = "";
 
@@ -21,7 +21,7 @@ export class LoginService {
     .set('username', username)
     .set('password', password);
 
-    const response = this.http.post<TokenResponse>(this.loginURL,
+    const response = this.http.post<TokenResponse>(`${this.backendURL}/login`,
       body,
       {
         headers: new HttpHeaders()
@@ -39,7 +39,15 @@ export class LoginService {
     return response;
   }
 
+  validateToken(token: string) {
+    return this.http.post(`${this.backendURL}/token/validate`, {"token" : token })
+  }
+
   isLoggedIn(): boolean {
     return (this.accessToken !== "");
+  }
+
+  getAccessToken(){
+    return this.accessToken;
   }
 }
