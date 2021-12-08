@@ -4,3 +4,24 @@ header {
     color: white;
     box-shadow: 5px 0px 10px #ddd;
 }
+nav {
+    display: inline;
+}
+nav a, span a {
+    color: white;
+    padding: 1em;
+    text-decoration: none;
+}
+span {
+    float: right;
+    padding: 1em;
+    margin: -1em;
+}
+span:hover, nav a:hover {
+    background-color: #900;
+}
+span img {
+    border-radius: 50%;
+    width: 2em;
+    margin: -0.5em 0em;
+}
