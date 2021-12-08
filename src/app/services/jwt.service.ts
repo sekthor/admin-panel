@@ -7,12 +7,18 @@ import { StorageService } from './storage.service';
 })
 export class JwtService {
 
+  accessToken: string = "";
+  refreshToken: string = "";
+  decodedToken: string = "";
+
   constructor(
     private storage: StorageService
   ) { }
 
     getAccessToken(): string | null {
-      return this.storage.get("accessToken");
+      if (!this.accessToken)
+        this.accessToken = this.storage.get("accessToken") || "";
+      return this.accessToken;
     }
 
     setAccessToken(token: string): void {
@@ -20,7 +26,9 @@ export class JwtService {
     }
 
     getRefreshToken(): string | null {
-       return this.storage.get("refreshToken");
+      if (!this.refreshToken)
+        this.refreshToken = this.storage.get("refreshToken") || "";
+      return this.refreshToken;
     }
 
     setRefreshToken(token: string): void {
@@ -28,6 +36,7 @@ export class JwtService {
     }
 
     decodeToken() {
+
     }
 
     getDecodeToken() {
