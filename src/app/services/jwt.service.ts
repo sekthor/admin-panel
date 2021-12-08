@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as jwt_decode from 'jwt-decode';
+import jwt_decode from 'jwt-decode';
 import { StorageService } from './storage.service';
 
 @Injectable({
@@ -9,7 +9,6 @@ export class JwtService {
 
   accessToken: string = "";
   refreshToken: string = "";
-  decodedToken: string = "";
 
   constructor(
     private storage: StorageService
@@ -23,6 +22,7 @@ export class JwtService {
 
     setAccessToken(token: string): void {
       this.storage.put("accessToken", token);
+      this.decodeToken();
     }
 
     getRefreshToken(): string | null {
@@ -35,20 +35,20 @@ export class JwtService {
       this.storage.put("refreshToken", token);
     }
 
-    decodeToken() {
-
-    }
-
-    getDecodeToken() {
-    }
-
-    getUser() {
+    decodeToken(): any {
+      try {
+        return jwt_decode(this.accessToken);
+      } catch (e) {
+        return null;
+      }
     }
 
     getUsername() {
+      return this.decodeToken().sub;
     }
 
     getExpiryTime() {
+      return this.decodeToken().exp;
     }
 
     isTokenExpired(): boolean {

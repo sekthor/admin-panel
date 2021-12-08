@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { JwtService } from 'src/app/services/jwt.service';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -9,13 +10,15 @@ import { LoginService } from 'src/app/services/login.service';
 export class DashboardComponent implements OnInit {
 
   constructor(
-    private loginService: LoginService
+    private loginService: LoginService,
+    private jwtService: JwtService
   ) { }
 
   ngOnInit(): void {
   }
 
   validate() {
+    console.log(this.jwtService.getUsername())
   }
 
 }
