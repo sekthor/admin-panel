@@ -1,53 +1,48 @@
 import { Injectable } from '@angular/core';
 import * as jwt_decode from 'jwt-decode';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JwtService {
 
-  jwtToken: string = "";
-  decodedToken: string =  "";
+  constructor(
+    private storage: StorageService
+  ) { }
 
-  constructor() { }
-  
-    setToken(token: string) {
-      if (token) {
-        this.jwtToken = token;
-      }
+    getAccessToken(): string | null {
+      return this.storage.get("accessToken");
+    }
+
+    setAccessToken(token: string): void {
+      this.storage.put("accessToken", token);
+    }
+
+    getRefreshToken(): string | null {
+       return this.storage.get("refreshToken");
+    }
+
+    setRefreshToken(token: string): void {
+      this.storage.put("refreshToken", token);
     }
 
     decodeToken() {
-      if (this.jwtToken) {
-      //this.decodedToken = jwt_decode(this.jwtToken);
-      }
     }
 
     getDecodeToken() {
-      //return jwt_decode(this.jwtToken);
     }
 
     getUser() {
-      this.decodeToken();
-      //return this.decodedToken ? this.decodedToken.displayname : null;
     }
 
-    getEmailId() {
-      this.decodeToken();
-      //return this.decodedToken ? this.decodedToken.email : null;
+    getUsername() {
     }
 
     getExpiryTime() {
-      this.decodeToken();
-      //return this.decodedToken ? this.decodedToken.exp : null;
     }
 
-    /*isTokenExpired(): boolean {
-      const expiryTime: number = this.getExpiryTime();
-      if (expiryTime) {
-        return ((1000 * expiryTime) - (new Date()).getTime()) < 5000;
-      } else {
-        return false;
-      }
-    }*/
+    isTokenExpired(): boolean {
+      return false;
+    }
 }

@@ -30,15 +30,10 @@ export class LoginComponent implements OnInit {
     if (!this.isFormValid()) return;
 
     this.loginService.login(this.username, this.password).subscribe(
-      response => {
-        this.accessToken = response.access_token;
-        this.refreshToken = response.refresh_token;
-        console.log(this.loginService.isLoggedIn())
-        this.router.navigate(["/dashboard"]);
-      },
-      error => {
-        this.errorMsg = "Invalid credentials";
-      } 
+      isLoggedin => {
+        if (isLoggedin)
+          this.router.navigate(["/dashboard"]);
+      }
     )
   }
 

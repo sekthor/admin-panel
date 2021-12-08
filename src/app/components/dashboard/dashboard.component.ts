@@ -16,9 +16,6 @@ export class DashboardComponent implements OnInit {
   }
 
   validate() {
-    this.loginService.validateToken(this.loginService.getAccessToken()).subscribe(
-      response => console.log(response)
-    );
   }
 
 }
